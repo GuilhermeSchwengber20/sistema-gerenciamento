@@ -56,12 +56,9 @@ export default{
     async adicionarItem(item){
       console.log(item)
 
+      this.content = {id: this.content.id +1}
       this.items.push(item);
-      this.content.descricao = "";
-      this.content.valor = "";
-      this.content.data = "",
-      this.content.tipo = "",
-      this.content.id ++;
+      console.log(this.items);
       this.calcular(item);
       // const data = {
       //   descricao: item.descricao,
