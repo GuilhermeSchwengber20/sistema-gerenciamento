@@ -15,13 +15,13 @@
                 </div>
                 <div id="tableBody" v-for="(item, index) in items" :key="index">
                     <div class="order-number">{{item.id}}</div>
-                    <div class="item-data">{{item.data.split('-').reverse().join('/')}}</div>
+                    <div class="item-data">{{item.data}}</div>
                     <div class="item-desc">{{item.descricao}}</div>
                     <div class="item-valor">R$ &nbsp; {{item.valor}}</div>
                     <div :class="item.tipo == 'recebimento' ? 'recebimento' : 'despesa'">{{item.tipo}}</div>
                     <div class="icons">
                         <i class="fa-solid fa-pencil" @click="editarItem(item)"></i>
-                        <i class="fa-solid fa-trash" @click="excluirItem(item, index)"></i>
+                        <i class="fa-solid fa-trash" @click="excluirItem(item.id)"></i>
 
                     </div>
 
@@ -45,9 +45,7 @@
 import Modal from "../components/Modal.vue"
 export default{
     name: "Tabela",
-    props:{
-        items: Array
-    },
+
     components: {
         Modal,
     },
@@ -58,13 +56,16 @@ export default{
             inputData: "",
             inputValor: "",
             msg: "",
+            items: [],
         }
     },
     methods:{
-        excluirItem(item, index){
-            console.log(item);
-            console.log(index);
-            this.items.splice(index, 1);
+        async excluirItem(id){
+            const req = await fetch(`http://localhost:3000/burgers/${id}`,{
+                method: "DELETE"
+            });
+
+            this.getPedidos();
 
         },
         editarItem(item){
@@ -75,15 +76,29 @@ export default{
             this.inputValor = item.valor
         },
         salvarEdicao() {
-            this.items.forEach(element => {
-                console.log(element);
-            })
+            this.items.forEach((element) => { 
+                console.log(target);
+            });
+
         },
-        fecharModal(){
+        fecharModal() {
             this.abrirModal = false;
         },
+        async getLista( ){
+            const req = await fetch("http://localhost:3000/items");
+            console.log(req);
+            const data = await req.json();
+            this.items = data;
+
+            console.log(this.items);
+            this.emmiter.emit("getLista");
+        },
+
     },
     mounted(){
+        this.getLista();
+
+        console.log(this.getLista())
     }
 }
 </script>

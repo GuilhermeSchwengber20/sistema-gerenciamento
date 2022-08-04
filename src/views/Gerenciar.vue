@@ -15,12 +15,12 @@
             <option value="recebimento" for="selecionar">Recebimento</option>
             <option value="despesa" for="selecionar">Despesa</option>
           </select>
-          <button id="buttonAdd">
+          <button id="buttonAdd" >
             <button @click="adicionarItem(content)">Adicionar Novo Item</button>
           </button>
         </div>
       </div>
-      <Tabela :items="items"/>
+      <Tabela/>
       <div class="containerResultados">
         <label>Despesas:</label>
         <input type="text" v-model="despesas"/>
@@ -46,7 +46,6 @@ export default{
         valor: "",
         tipo: "selecione",
       },
-      items: [],
       despesas: "",
       recebimentos: "",
 
@@ -54,27 +53,22 @@ export default{
   },
   methods: {
     async adicionarItem(item){
-      console.log(item)
+      const data = {
+        descricao: item.descricao,
+        data: item.data,
+        valor: item.valor,
+        tipo: item.tipo
+      }
 
-      this.content = {id: this.content.id +1}
-      this.items.push(item);
-      console.log(this.items);
-      this.calcular(item);
-      // const data = {
-      //   descricao: item.descricao,
-      //   data: item.data,
-      //   valor: item.valor,
-      //   tipo: item.tipo
-      // }
-
-      // const dataJSON = JSON.stringify(data);
-
-      // const req = await fetch("http://localhost:3000/items", {
-      //   method: "POST",
-      //   headers:{"Content-Type": "application/json"},
-      //   body: dataJSON
-      // });
-      // const res = await req.json();
+      const dataJSON = JSON.stringify(data);
+      
+      const req = await fetch("http://localhost:3000/items", {
+        method: "POST",
+        headers:{"Content-Type": "application/json"},
+        body: dataJSON
+      });
+      const res = await req.json();
+      this.emmiter.$on("getLista");
     },
     calcular(item){
       if(item.tipo == 'despesa'){
