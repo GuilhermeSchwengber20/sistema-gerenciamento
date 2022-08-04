@@ -1,151 +1,52 @@
 {
   "items": [
     {
-      "descricao": "descript",
-      "data": "2022-06-21",
-      "valor": "600",
+      "descricao": "desc",
+      "data": "2000-05-12",
+      "valor": "1200",
       "tipo": "recebimento",
       "id": 1
     },
     {
-      "descricao": "asda",
-      "data": "2123-03-12",
-      "valor": "23123",
-      "tipo": "despesa",
       "id": 2
     },
     {
-      "descricao": "asda",
-      "data": "2123-03-12",
-      "valor": "23123",
-      "tipo": "despesa",
+      "descricao": "SADAS",
+      "data": "3141-03-12",
+      "valor": "123123",
+      "tipo": "recebimento",
       "id": 3
     },
     {
-      "descricao": "asda",
-      "data": "2123-03-12",
-      "valor": "23123",
-      "tipo": "despesa",
+      "descricao": "",
+      "data": "",
+      "valor": "",
+      "tipo": "selecione",
       "id": 4
     },
     {
-      "descricao": "asda",
-      "data": "2123-03-12",
-      "valor": "23123",
-      "tipo": "despesa",
       "id": 5
     },
     {
-      "descricao": "asda",
-      "data": "2123-03-12",
-      "valor": "23123",
-      "tipo": "despesa",
+      "descricao": "",
+      "data": "",
+      "valor": "",
+      "tipo": "selecione",
       "id": 6
     },
     {
-      "descricao": "asda",
-      "data": "2123-03-12",
-      "valor": "23123",
-      "tipo": "despesa",
+      "descricao": "",
+      "data": "",
+      "valor": "",
+      "tipo": "selecione",
       "id": 7
     },
     {
-      "descricao": "asda",
-      "data": "2123-03-12",
-      "valor": "23123",
-      "tipo": "despesa",
-      "id": 8
-    },
-    {
-      "descricao": "asdasd",
-      "data": "2222-03-21",
-      "valor": "1200",
-      "tipo": "recebimento",
-      "id": 9
-    },
-    {
-      "descricao": "asda",
-      "data": "23123-01-01",
-      "valor": "23123",
-      "tipo": "despesa",
-      "id": 10
-    },
-    {
-      "descricao": "asdasss",
-      "data": "23123-01-01",
-      "valor": "231223",
-      "tipo": "despesa",
-      "id": 11
-    },
-    {
-      "descricao": "asdasss",
-      "data": "23123-01-01",
-      "valor": "231223",
-      "tipo": "despesa",
-      "id": 12
-    },
-    {
-      "descricao": "asdas",
-      "data": "2000-02-12",
-      "valor": "123",
-      "tipo": "recebimento",
-      "id": 13
-    },
-    {
-      "descricao": "asdas",
-      "data": "2000-02-12",
-      "valor": "123",
-      "tipo": "recebimento",
-      "id": 14
-    },
-    {
-      "descricao": "asdas",
-      "data": "2000-02-12",
-      "valor": "123",
-      "tipo": "recebimento",
-      "id": 15
-    },
-    {
-      "descricao": "asdas",
-      "data": "2000-02-12",
-      "valor": "123",
-      "tipo": "recebimento",
-      "id": 16
-    },
-    {
-      "descricao": "asdas",
-      "data": "2000-02-12",
-      "valor": "123",
-      "tipo": "recebimento",
-      "id": 17
-    },
-    {
-      "descricao": "asdas",
-      "data": "2000-02-12",
-      "valor": "123",
-      "tipo": "recebimento",
-      "id": 18
-    },
-    {
-      "descricao": "asdas",
-      "data": "0241-03-12",
-      "valor": "2020",
-      "tipo": "recebimento",
-      "id": 19
-    },
-    {
-      "descricao": "teste123",
-      "data": "0031-02-12",
-      "valor": "1231",
-      "tipo": "despesa",
-      "id": 20
-    },
-    {
-      "descricao": "sda",
+      "descricao": "",
       "data": "",
-      "valor": "123",
+      "valor": "",
       "tipo": "selecione",
-      "id": 21
+      "id": 8
     }
   ]
 }

@@ -20,12 +20,14 @@ export default{
   box-sizing: border-box;
   outline: 0;
   font-family: 'Poppins', sans-serif;
-  scroll-behavior: smooth;
+  overflow: hidden;
 }
 
-
-
-/*
+/* #172026
+ #5fcdd9
+ #027373
+ #048fad
+ #04bf9d
 
  */
 </style>
