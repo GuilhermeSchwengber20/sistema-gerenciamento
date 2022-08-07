@@ -15,18 +15,17 @@
             <option value="recebimento" for="selecionar">Recebimento</option>
             <option value="despesa" for="selecionar">Despesa</option>
           </select>
-          <button id="buttonAdd" >
-            <button @click="adicionarItem(content)" class="addbtn">Adicionar Novo Item</button>
-          </button>
+          <button @click="adicionarItem(content), calcular(content)" class="addbtn">Adicionar Novo Item </button>
         </div>
       </div>
       <Tabela :items="items"/>
-      <!-- <div class="containerResultados">
-        <label>Despesas:</label>
-        <input type="text" v-model="despesas"/>
-        <label>Recebimentos:</label>
-        <input type="text" v-model="recebimentos"/>
-      </div> -->
+      <div class="containerResultados">
+        <div>
+          <label>Saldo Atual: &nbsp;</label>
+          <input type="text" id="inputSaldo" v-model="saldo"  readonly />
+        </div>
+        <button class="btnFecharTabela">Fechar Tabela</button>
+      </div>
     </div>
   </div>
 </template>
@@ -46,8 +45,7 @@ export default{
         valor: "",
         tipo: "selecione",
       },
-      despesas: "",
-      recebimentos: "",
+      saldo: "",
       items: [],
 
     }
@@ -58,11 +56,9 @@ export default{
       const data = {
         descricao: item.descricao,
         data: item.data,
-        valor: item.valor,
+        valor: item.valor.replace(",", " ").replace(" ", ","),
         tipo: item.tipo
       }
-      this.items = data;
-
       const dataJSON = JSON.stringify(data);
       
       const req = await fetch("http://localhost:3001/items", {
@@ -71,34 +67,40 @@ export default{
         body: dataJSON
       });
       const res = await req.json();
+      console.log(res)
       this.content = {};
       this.getLista();
     },
     calcular(item){
-      if(item.tipo == 'despesa'){
-        if(this.items.length == 1){
-          this.despesas = item.valor;
+      if(item.tipo == 'recebimento'){
+        if(this.items.length == 0){
+          this.saldo = item.valor.replace(",", ".");
         }else{
-          this.despesas = Number(this.despesas) + Number(item.valor);
+          this.saldo = Number(this.saldo) + Number(item.valor.replace(",", "."));
+          console.log(item.valor);
         }
       }
-      if(item.tipo == 'recebimento'){
-        if(this.items.length == 1){
-          this.recebimentos = item.valor;
+      if(item.tipo == 'despesa'){
+        if(this.items.length == 0){
+          this.saldo = item.valor;
         }else{
-          this.recebimentos = Number(this.recebimentos) + Number(item.valor);
+          this.saldo = Number(this.saldo) - Number(item.valor.replace(",", "."));
         }
       }
     },
     async getLista( ){
       const req = await fetch("http://localhost:3001/items");
+      console.log(req)
       const data = await req.json();
-      this.items = data;      
-    },
+      console.log(data);
+      this.items = data;
+      console.log(this.items); 
+    },  
 
   },
   mounted(){
     this.getLista();
+    console.log(this.items);
   }
 
   
@@ -187,4 +189,41 @@ button{
   transition: 0.3s ease-in;
 }
 
+.containerResultados{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;  
+  width: 100%;
+  max-width: 80%;
+}
+
+.containerResultados input{
+  width: 200px;
+  line-height: 30px;
+  outline: none;
+  color: #fff;
+  background: transparent;
+  text-align: right;
+  border: 3px solid #048fad;
+  border-radius: 10px;
+  font-size: 20px;
+}
+.containerResultados button{
+  background: transparent;
+  color: #fff;
+  font-weight: 400;
+  font-size: 15px;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border: 2px solid #5fcdd9;
+  border-radius: 20px;
+  transform: translate(0);
+  overflow: hidden;
+  cursor: pointer;
+}
+.containerResultados button:hover{
+  border:none;
+  color: #5fcdd9;
+  transition: 0.3s ease-in;  
+}
 </style>

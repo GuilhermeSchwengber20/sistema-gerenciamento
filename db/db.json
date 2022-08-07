@@ -1,52 +1,11 @@
 {
   "items": [
     {
-      "descricao": "desc",
-      "data": "2000-05-12",
-      "valor": "1200",
-      "tipo": "recebimento",
-      "id": 1
-    },
-    {
-      "id": 2
-    },
-    {
-      "descricao": "SADAS",
-      "data": "3141-03-12",
-      "valor": "123123",
+      "descricao": "descr",
+      "data": "2022-05-12",
+      "valor": "300.20",
       "tipo": "recebimento",
       "id": 3
-    },
-    {
-      "descricao": "",
-      "data": "",
-      "valor": "",
-      "tipo": "selecione",
-      "id": 4
-    },
-    {
-      "id": 5
-    },
-    {
-      "descricao": "",
-      "data": "",
-      "valor": "",
-      "tipo": "selecione",
-      "id": 6
-    },
-    {
-      "descricao": "",
-      "data": "",
-      "valor": "",
-      "tipo": "selecione",
-      "id": 7
-    },
-    {
-      "descricao": "",
-      "data": "",
-      "valor": "",
-      "tipo": "selecione",
-      "id": 8
     }
   ]
 }

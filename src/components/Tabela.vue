@@ -30,9 +30,10 @@
 
     <Modal v-if="abrirModal == true" v-on:fecharModal="fecharModal" :dimensoes="{width: 'auto', height:'auto'}" :msg="this.msg">
         <div class="contentModal">
-            <input type="text" v-model="inputDesc">
-            <input type="date" v-model="inputData"/>
-            <input type="text" v-model="inputValor"/>
+            <input type="text" v-model="inputId" class="input" style="min-width: 30px"  readonly/>
+            <input type="text" v-model="inputDesc" class="input" style="min-width: 200px">
+            <input type="date" v-model="inputData" class="input" style="min-width: 120px"/>
+            <input type="text" v-model="inputValor" class="input" style="min-width: 50px"/>
             <button @click="salvarEdicao">
                 Salvar
             </button>
@@ -45,7 +46,7 @@ import Modal from "../components/Modal.vue"
 export default{
     name: "Tabela",
     props:{
-        items: Array
+        items: Object
     },
 
     components: {
@@ -54,6 +55,7 @@ export default{
     data(){
         return{
             abrirModal: false,
+            inputId: "",
             inputDesc: "",
             inputData: "",
             inputValor: "",
@@ -72,15 +74,34 @@ export default{
         editarItem(item){
             this.msg = `Editar ${item.tipo}`;
             this.abrirModal = true;
+            this.inputId = item.id;
             this.inputDesc = item.descricao;
             this.inputData = item.data,
             this.inputValor = item.valor
         },
-        salvarEdicao() {
-            this.items.forEach((element) => { 
-                console.log(target);
+        async salvarEdicao() {
+            this.items.forEach(async (element) => { 
+                if(element.id == this.inputId){
+                    element.descricao = this.inputDesc;
+                    element.data = this.inputData;
+                    element.valor = this.inputValor;
+                    element.tipo = element.tipo;
+                    const data = {
+                        descricao: this.inputDesc,
+                        data: this.inputData,
+                        valor: this.inputValor,
+                        tipo: element.tipo
+                    }
+                    const dataJSON = JSON.stringify(data);
+                    const req = await fetch(`http://localhost:3001/items/${element.id}`, {
+                        method: "PUT",
+                        headers: {"Content-Type": "application/json"},
+                        body: dataJSON
+                    })
+                    console.log(req);
+                }
             });
-
+            this.abrirModal = false
         },
         fecharModal() {
             this.abrirModal = false;
@@ -98,7 +119,7 @@ export default{
 }
 .tableContainer{
     width: 100%;
-    height: 92vh;
+    height: auto;
 }
 
 table{
@@ -155,5 +176,40 @@ tbody tr td{
 .delete:hover{
     transition: 0.5s;
     color: #c90606;
+}
+
+.contentModal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1s0px;
+    white-space: nowrap;
+    width: 500px;
+}
+
+.contentModal input{
+    height: 25px;
+    padding: 10px;
+    width: 100%;
+    background: #5fcdd91c;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    color: #fff;
+}
+.contentModal button{
+    width: 100%;
+    padding: 5px;
+    outline: none;
+    border: 2px solid #048fad;
+    border-radius: 10px;
+    color: #fff;
+    background: transparent ;
+}
+
+.contentModal button:hover{
+    transition: 0.1s;
+    border: none;
+    color:#048fad;
 }
 </style>

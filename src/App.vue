@@ -20,7 +20,6 @@ export default{
   box-sizing: border-box;
   outline: 0;
   font-family: 'Poppins', sans-serif;
-  overflow: hidden;
 }
 
 /* #172026
